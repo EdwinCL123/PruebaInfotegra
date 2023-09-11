@@ -23,16 +23,9 @@ public function PruebaTecnica(Request $request){
 
     $response = Http::get('https://rickandmortyapi.com/api/character');
 
-    // Verificar si la solicitud fue exitosa
     if ($response->successful()) {
-        // Obtener los datos JSON de la respuesta
-        $data = $response->json();
-
-        // Hacer algo con los datos (por ejemplo, mostrarlos en una vista)
-
-    
+        $data = $response->json();   
     } else {
-        // Manejar el caso de una solicitud fallida
         dd("error");
     }
 
@@ -102,15 +95,7 @@ public function EditarRegistros(Request $request){
 public function VerDatos(){
 
     $registrosBD = TablaPrueba::all();
-
-
-
     return view('verregistros',compact('registrosBD'));
-
-
-
-
-
 }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

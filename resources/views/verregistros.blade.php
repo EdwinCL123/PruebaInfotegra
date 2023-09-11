@@ -93,134 +93,86 @@ body {
 
 function SaveData(valorinput) {
     event.preventDefault();
-
     var fila = document.getElementById("registro"+valorinput);
+    // Obtener todos los elementos <input> dentro de la fila
     var inputs = fila.getElementsByTagName("input");
-
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].disabled = true;
     }
-
-
+    
     var name = document.getElementsByName('name_'+valorinput)[0].value;
     var status = document.getElementsByName('status_'+valorinput)[0].value;
     var species = document.getElementsByName('species_'+valorinput)[0].value;
     var type = document.getElementsByName('type_'+valorinput)[0].value;
     var gender = document.getElementsByName('gender_'+valorinput)[0].value;
     var image = document.getElementsByName('image_'+valorinput)[0].value;
-
-        // Obtener todos los elementos <input> dentro de la fila
-        var inputs = fila.getElementsByTagName("input");
-        // Iterar a través de los elementos <input> y cambiar su valor
-
-
-
-
-
-
-
-
-
-
-
-$.ajax({
-type : 'POST',
-url  : '/PruebaTecnica/public/editar',
-data:  {
-id: valorinput,
-name: name,
-status: status,
-species: species,
-type: type,
-gender: gender,
-image: image,
-
-_token: '{!! csrf_token() !!}'
-},
-
-success:function(data,resul) {
-// console.log(data);
-$('#respuestaguardado'+valorinput).html(data).fadeIn();
-// $('#respuesta').removeClass('d-none');
-// $('#url').val('')
-// $('#nombre_corto_link').val('')
-},
-error: function (jqXHR, textStatus, errorThrown)
-{
-console.log(jqXHR, textStatus, errorThrown)
-}
-});
-return false;
-
-
-
-
-
-
-       
-
-        document.getElementById("savedata").style.display = "none";
-        document.getElementById("saved"+valorinput).style.display = "none";
-
-
-
-
-
-
+    $.ajax({
+        type : 'POST',
+        url  : '/PruebaTecnica/public/editar',
+        data:  {
+            id: valorinput,
+            name: name,
+            status: status,
+            species: species,
+            type: type,
+            gender: gender,
+            image: image,
+            _token: '{!! csrf_token() !!}'
+        },
+        success:function(data,resul) {
+            // console.log(data);
+            $('#respuestaguardado'+valorinput).html(data).fadeIn();
+            // $('#respuesta').removeClass('d-none');
+          
+        },
+            error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR, textStatus, errorThrown)
+        }
+    });
+    return false;
+    document.getElementById("savedata").style.display = "none";
+    document.getElementById("saved"+valorinput).style.display = "none";
 }
 
-        function quitardisable(valorinput) {    
-        event.preventDefault();
-        var fila = document.getElementById("registro"+valorinput);
-        // Obtener todos los elementos <input> dentro de la fila
-        var inputs = fila.getElementsByTagName("input");
-        // Iterar a través de los elementos <input> y cambiar su valor
-        for (var i = 0; i < inputs.length; i++) {
-        inputs[i].disabled = false;
-        }
 
-        document.getElementById("savedata").style.display = "block";
-        document.getElementById("saved"+valorinput).style.display = "block";
+function quitardisable(valorinput) {    
+    event.preventDefault();
+    var fila = document.getElementById("registro"+valorinput);
+    // Obtener todos los elementos <input> dentro de la fila
+    var inputs = fila.getElementsByTagName("input");
+    // Iterar a través de los elementos <input> y cambiar su valor
+    for (var i = 0; i < inputs.length; i++) {
+    inputs[i].disabled = false;
+    }
+    document.getElementById("savedata").style.display = "block";
+    document.getElementById("saved"+valorinput).style.display = "block";
+}
 
 
-        }
-
-        
 function capturarValor(valorinput) {
-            // Capturar el valor del input
-            const valorInput = valorinput;
-            // Hacer algo con el valor capturado (por ejemplo, mostrarlo en un alert)
-            alert("Valor del input: " + valorInput);
-
-            // También puedes realizar otras acciones con el valor, como enviarlo a un servidor o mostrarlo en la página.
-       
-       
-            $.ajax({
-type : 'POST',
-url  : '/PruebaTecnica/public/peticion',
-data:  {
-id: valorinput,
-_token: '{!! csrf_token() !!}'
-},
-
-success:function(data,resul) {
-// console.log(data);
-$('#respuesta').html(data).fadeIn();
-// $('#respuesta').removeClass('d-none');
-// $('#url').val('')
-// $('#nombre_corto_link').val('')
-},
-error: function (jqXHR, textStatus, errorThrown)
-{
-console.log(jqXHR, textStatus, errorThrown)
-}
-});
-return false;
-
-
-       
+    // Capturar el valor del input
+    const valorInput = valorinput;
+    // Hacer algo con el valor capturado (por ejemplo, mostrarlo en un alert)
+    alert("Valor del input: " + valorInput);
+    // También puedes realizar otras acciones con el valor, como enviarlo a un servidor o mostrarlo en la página.
+    $.ajax({
+        type : 'POST',
+        url  : '/PruebaTecnica/public/peticion',
+        data:  {
+        id: valorinput,
+        _token: '{!! csrf_token() !!}'
+        },
+        success:function(data,resul) {
+            // console.log(data);
+            $('#respuesta').html(data).fadeIn();
+            // $('#respuesta').removeClass('d-none');
+        },
+            error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR, textStatus, errorThrown)
         }
-
-
-      
+    });
+    return false;
+}
 </script>
